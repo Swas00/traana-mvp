@@ -3,6 +3,8 @@
 > **Disaster-Alert & Emergency-Response Minimum Viable Product (MVP)**  
 > **Core Mission Flow:** `Alert → Understand → Act → Find Shelter → Evacuate → Get Help`
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Swas00/traana-mvp)
+
 ---
 
 ## 📌 Executive Summary
