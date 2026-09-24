@@ -713,6 +713,8 @@ export const ndmaDosAndDonts = {
   }
 };
 
+export const ndmaGuidelines = ndmaDosAndDonts;
+
 // Aapda Mitra Community First Responder Volunteer Units (Government of India / NDMA Scheme)
 export const aapdaMitraNetwork = [
   {
