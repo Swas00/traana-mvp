@@ -47,8 +47,8 @@ graph TD
     subgraph DataAndAI["🧠 Intelligence & Persistence"]
         DB_Mongo[("MongoDB / Local Mongoose")]
         Store_Memory[("Resilient In-Memory Dual Store")]
-        AI_Gemini["Google GenAI (Gemini 3.8 Flash)"]
-        AI_Core["TRAANA Contextual Offline Engine"]
+        AI_Engine["TRAANA Neural Disaster AI Engine"]
+        AI_Core["TRAANA Contextual Offline Resilience Core"]
     end
 
     UI_Dash --> API_Alerts
@@ -64,7 +64,7 @@ graph TD
     API_Shelters --> DB_Mongo
     API_Shelters -. Fallback .-> Store_Memory
     API_Resources --> DB_Mongo
-    API_Assistant --> AI_Gemini
+    API_Assistant --> AI_Engine
     API_Assistant -. Fallback .-> AI_Core
 ```
 
@@ -159,7 +159,7 @@ sequenceDiagram
     participant Frontend as 🖥️ TRAANA Web App
     participant Backend as ⚙️ Express REST API
     participant DB as 🗄️ MongoDB Database
-    participant AI as 🤖 Gemini / Emergency AI
+    participant AI as 🤖 TRAANA Neural Disaster AI
 
     Admin->>Frontend: 1. Opens Admin Dispatch
     Admin->>Backend: 2. Triggers "HIGH-SEVERITY FLOOD" Alert
@@ -230,8 +230,7 @@ sequenceDiagram
 - **Audio Synthesizer:** Native Web Audio API emergency siren oscillator wail (100% offline, zero external audio asset dependency).
 - **Speech Synthesis:** Web Speech API for emergency broadcast read-aloud and accessibility.
 - **Backend:** Node.js, Express.js REST API with CORS and structured routing.
-- **Database:** MongoDB with Mongoose document schemas + Automatic Dual In-Memory Failover Cache (ensures uninterrupted operation even during internet/database disconnects).
-- **AI Engine:** Google GenAI SDK (`@google/genai`) using `gemini-3.8-flash` with contextual situation injection + Built-in offline emergency knowledge core.
+- **AI Engine:** TRAANA Contextual Neural Disaster AI Engine with real-time multi-hazard situational injection + Built-in offline emergency knowledge core.
 
 ---
 

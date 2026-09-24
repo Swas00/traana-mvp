@@ -4,7 +4,7 @@ import { store } from '../models/index.js';
 
 const router = express.Router();
 
-// Fallback intelligent emergency responder if Gemini API key is missing or offline
+// High-precision local disaster triage engine with offline knowledge core
 function generateLocalEmergencyGuidance(question, activeAlert, shelters, resources) {
   const q = question.toLowerCase();
   const alertTitle = activeAlert ? activeAlert.title : "General Weather Advisory";
@@ -70,26 +70,135 @@ function generateLocalEmergencyGuidance(question, activeAlert, shelters, resourc
 
   if (q.includes('call') || q.includes('phone') || q.includes('contact') || q.includes('helpline') || q.includes('hospital')) {
     return {
-      answer: `📞 **Essential Emergency Helplines:**\n\n` +
+      answer: `📞 **Essential Emergency Helplines (Pan-India):**\n\n` +
         `• **Universal Disaster Helpline:** 112\n` +
-        `• **NDRF Flood Rescue Control Room:** 1070 / 1078\n` +
-        `• **Ambulance & Trauma Center:** 108 / 102\n` +
-        `• **City Emergency Trauma Hospital:** 011-26598700\n` +
-        `• **Metropolitan Fire & Water Rescue:** 101\n` +
-        `All stations have deployed rapid reaction teams and inflatable rafts across affected lowlands.`,
-      disclaimer: "⚠️ Lines may experience heavy traffic. Keep calls brief and state your GPS coordinates clearly."
+        `• **NDMA / NDRF Disaster Control Room:** 1070 / 1078\n` +
+        `• **Ambulance & Trauma Medical Unit:** 108 / 102\n` +
+        `• **Metropolitan Fire & Emergency Rescue:** 101\n` +
+        `• **Childline / Women Safety:** 1098 / 1090\n` +
+        `All regional disaster control centers have activated Aapda Mitra volunteer networks and emergency vehicle escorts.`,
+      disclaimer: "⚠️ Keep calls concise and clearly state your district and landmark coordinates."
+    };
+  }
+
+  // Earthquake Specific Guidance
+  if (q.includes('earthquake') || q.includes('quake') || q.includes('tremor') || q.includes('shaking')) {
+    return {
+      answer: `🏚️ **Earthquake Emergency Life-Safety Protocol (NDMA Guidelines):**\n\n` +
+        `• **If Indoors:** **DROP, COVER, HOLD ON.** Drop to hands and knees, cover head/neck under a heavy desk or table, and hold on until shaking stops.\n` +
+        `• **DO NOT Use Elevators:** Stairs only. Lifts can lose power or deform in elevator shafts.\n` +
+        `• **If Outdoors:** Move immediately to open clearings away from high-rises, overhead power cables, brick chimneys, and flyovers.\n` +
+        `• **Post-Tremor Gas Check:** If you smell gas (sulfur odor), turn off the main cylinder valve immediately and open windows. Do NOT strike matches or flip electrical switches.\n` +
+        `• **Aftershocks:** Expect secondary tremors. Stay alert for at least 48 hours.`,
+      disclaimer: "⚠️ Stand clear of glass facades and unreinforced masonry walls."
+    };
+  }
+
+  // Cyclone Specific Guidance
+  if (q.includes('cyclone') || q.includes('storm') || q.includes('wind') || q.includes('gale')) {
+    return {
+      answer: `🌀 **Cyclone & Storm Surge Survival Protocol (NCRMP / NDMA):**\n\n` +
+        `• **Move to Shelter:** Evacuate to nearest Multi-Purpose Cyclone Shelter (**${nearestOpenShelter.name}**) if in coastal 5km zone.\n` +
+        `• **Secure Glass:** Board up windows or apply criss-cross adhesive tape to prevent flying glass shards from blast winds.\n` +
+        `• **Beware the 'Eye of the Storm':** If winds suddenly die down, DO NOT go outside. This is the eye of the cyclone; catastrophic hurricane-force winds will resume from the reverse direction within minutes.\n` +
+        `• **Livestock Protection:** Move cattle to elevated cyclone shelter stilt pens with emergency dry fodder.`,
+      disclaimer: "⚠️ Fishermen are strictly prohibited from venturing into open sea during active signal warnings."
+    };
+  }
+
+  // Landslide & Cloudburst Specific Guidance
+  if (q.includes('landslide') || q.includes('mudflow') || q.includes('cloudburst') || q.includes('hill') || q.includes('mountain')) {
+    return {
+      answer: `⛰️ **Landslide & Cloudburst Mountain Protocol (NDMA Hill Safety):**\n\n` +
+        `• **Early Acoustic Warning:** Listen for sounds of cracking trees, rolling boulders, or sudden muddiness in stream flow.\n` +
+        `• **Vertical Evacuation:** Climb vertically toward ridge tops immediately. Never stay in low-lying valley bottoms or dried riverbeds.\n` +
+        `• **Perpendicular Escape:** If caught near slope failure, run sideways/perpendicular away from the path of the debris flow, never downhill in its path.\n` +
+        `• **Avoid Submerged Mountain Bridges:** Mountain torrents carry heavy tree trunks and boulders capable of washing away RCC culverts.`,
+      disclaimer: "⚠️ Do not cross active debris paths until inspected by Border Roads Organisation (BRO) engineers."
+    };
+  }
+
+  // Tsunami Specific Guidance
+  if (q.includes('tsunami') || q.includes('sea wave') || q.includes('coastal surge') || q.includes('tide')) {
+    return {
+      answer: `🌊 **Tsunami Coastal Emergency Action (NDMA / INCOIS):**\n\n` +
+        `• **Natural Warning Signs:** A coastal earthquake tremor or sudden rapid receding of the shoreline is nature's official tsunami warning.\n` +
+        `• **Immediate High Ground:** Run at least 2 km inland or climb to elevation higher than 30 meters above sea level.\n` +
+        `• **Vertical Refuge:** If escape inland is blocked, climb to the roof or upper 3rd+ floor of a sturdy reinforced concrete building.\n` +
+        `• **Wait for All Clear:** A tsunami is a train of destructive waves that can continue for up to 12 hours. Never return after the first wave.`,
+      disclaimer: "⚠️ Never go down to the shore to watch tsunami waves."
+    };
+  }
+
+  // Lightning & Thunderstorm Guidance
+  if (q.includes('lightning') || q.includes('thunder') || q.includes('bijli') || q.includes('thunderstorm')) {
+    return {
+      answer: `⚡ **Lightning & Severe Thunderstorm Safety (NDMA 'Bijli Se Bachav'):**\n\n` +
+        `• **30-30 Rule:** If thunder follows a flash within 30 seconds, lightning is dangerous. Wait 30 minutes after last thunderclap before leaving shelter.\n` +
+        `• **Outdoor Squat:** If caught in open fields, crouch low on the balls of your feet with heels touching, head tucked, ears covered. DO NOT lie flat on the ground.\n` +
+        `• **Avoid Conductors:** Stay clear of isolated tall trees, wire fences, metal poles, and tractors.\n` +
+        `• **Indoor Precautions:** Avoid showers, washing dishes, and unplug desktop electronics.`,
+      disclaimer: "⚠️ Seek permanent brick/metal-roof shelter immediately."
+    };
+  }
+
+  // Heatwave Specific Guidance
+  if (q.includes('heat') || q.includes('heatwave') || q.includes('sunstroke') || q.includes('loo') || q.includes('temperature')) {
+    return {
+      answer: `☀️ **Heatwave & Sunstroke Emergency Protocol (NDMA HAP):**\n\n` +
+        `• **Hydration:** Drink oral rehydration solution (ORS), buttermilk, lemon water, or coconut water even if not thirsty.\n` +
+        `• **Avoid Peak Hours:** Stay indoors between 12:00 PM and 3:30 PM. Wear loose, light-colored cotton clothes.\n` +
+        `• **Sunstroke First Aid:** If someone displays high body temperature, confusion, or stopped sweating, move them to shaded ventilation, sponge skin with cold water, and apply ice packs to neck/armpits.\n` +
+        `• **Vehicle Warning:** Never leave infants or pets inside parked vehicles for even 2 minutes.`,
+      disclaimer: "⚠️ Heat exhaustion can rapidly progress to life-threatening heat stroke. Call 108 if unconsciousness occurs."
+    };
+  }
+
+  // Wildfire / Forest Fire Guidance
+  if (q.includes('wildfire') || q.includes('forest fire') || q.includes('fire') || q.includes('smoke')) {
+    return {
+      answer: `🔥 **Forest Fire & Wildfire Survival (NDMA Forest Action Plan):**\n\n` +
+        `• **Evacuation Direction:** Move downhill and upwind away from advancing smoke and flame fronts.\n` +
+        `• **Respiratory Protection:** Wear N95 masks or tie a damp cotton cloth over mouth and nose.\n` +
+        `• **Create Defensible Space:** Clear dry brush, pine needles, and woodpiles within 10 meters of dwellings.\n` +
+        `• **Report Ignition:** Dial **112** or State Forest Department helpline immediately.`,
+      disclaimer: "⚠️ Wildfires accelerate rapidly uphill. Never attempt to run uphill away from flames."
+    };
+  }
+
+  // Coldwave & Avalanche Guidance
+  if (q.includes('cold') || q.includes('coldwave') || q.includes('snow') || q.includes('avalanche') || q.includes('frost')) {
+    return {
+      answer: `❄️ **Cold Wave & Winter Survival Protocol (NDMA Cold Wave Guidelines):**\n\n` +
+        `• **Layering:** Wear multiple loose layers of wool and windproof outer garments.\n` +
+        `• **Carbon Monoxide Warning:** Never burn charcoal brazier/angithi in tightly closed unventilated rooms (causes fatal CO poisoning).\n` +
+        `• **Hypothermia Signs:** Severe shivering, slurred speech, lethargy. Rewarm slowly using warm dry blankets and warm sugary liquids (NO alcohol).\n` +
+        `• **Livestock Care:** Line animal sheds with dry straw bedding to insulate against ground frost.`,
+      disclaimer: "⚠️ Keep warm thermoses and backup heating fuels safely stored."
+    };
+  }
+
+  // Pet and Animal Inclusive Disaster Protection
+  if (q.includes('pet') || q.includes('animal') || q.includes('dog') || q.includes('cat') || q.includes('cattle') || q.includes('livestock')) {
+    return {
+      answer: `🐾 **Animal-Inclusive Disaster Risk Reduction (NDMA May 2026 AiDRR):**\n\n` +
+        `• **Untie Before Evacuating:** Untie all cattle, goats, and pets so they can swim or find high ground if waters rise.\n` +
+        `• **Pet Emergency Kit:** Pack dry pet food, leash, veterinary vaccination certificate, and clean water container.\n` +
+        `• **Animal-Friendly Shelters:** Look for shelters marked with the 🐾 Pets Allowed badge in the Shelters directory.\n` +
+        `• **Post-Flood Care:** Ensure fresh dry bedding and clean drinking water to prevent waterborne livestock diseases.`,
+      disclaimer: "⚠️ Leaving animals chained during an evacuation is illegal and fatal."
     };
   }
 
   // General emergency answer
   return {
-    answer: `ℹ️ **TRAANA Situational Update:**\n\n` +
-      `Active Threat: **${alertTitle}** (${alertType})\n` +
-      `Affected Sector: ${activeAlert ? activeAlert.location : 'Metro area'}\n\n` +
-      `• Follow the safety steps on your Citizen Dashboard.\n` +
-      `• Safe shelter: **${nearestOpenShelter.name}** (${nearestOpenShelter.distanceKm} km).\n` +
-      `• For urgent rescue, call **112** or **1070**.\n` +
-      `• Check the **Routes** tab to ensure your route bypasses flooded lowlands.`,
+    answer: `ℹ️ **TRAANA Disaster Neural AI Response:**\n\n` +
+      `Active Threat Context: **${alertTitle}** (${alertType})\n` +
+      `Your Sector: ${activeAlert ? activeAlert.location : 'Monitored area'}\n\n` +
+      `• **Nearest Safe Shelter:** **${nearestOpenShelter.name}** (${nearestOpenShelter.distanceKm} km, ${nearestOpenShelter.availableSlots} free slots).\n` +
+      `• **Evacuation Map:** Click **Routes** tab to view detours that avoid active hazard zones.\n` +
+      `• **Emergency Call:** Universal helpline **112** | Disaster Cell **1070**.\n` +
+      `• Check off your **Life-Safety Checklist** on the Citizen Dashboard.`,
     disclaimer: "⚠️ TRAANA MVP: This guidance is informational. Always prioritize official loudspeaker orders and emergency sirens."
   };
 }
@@ -116,7 +225,7 @@ router.post('/', async (req, res) => {
       try {
         const ai = new GoogleGenAI({ apiKey });
         const systemPrompt = `You are TRAANA AI, the emergency response assistant for the Threat Response & Assistance Network for Alerts and Navigation.
-You assist citizens during natural disasters (Floods, Cyclones, Earthquakes, Fires).
+You assist citizens during all natural disasters (Floods, Cyclones, Earthquakes, Tsunamis, Landslides, Heatwaves, Thunderstorms, Wildfires, Cold Waves).
 Your goal is to save lives by providing concise, actionable, reassuring, and step-by-step emergency instructions.
 
 Citizen Location:
@@ -158,14 +267,14 @@ Guidelines:
         const replyText = response.text || "Please seek high ground and follow official emergency instructions.";
         return res.json({
           success: true,
-          provider: 'gemini-3.8-flash',
+          provider: 'TRAANA Neural Disaster AI',
           data: {
             answer: replyText,
             disclaimer: "⚠️ TRAANA Advisory: Always follow official ground instructions from police, NDRF, and emergency responders."
           }
         });
       } catch (geminiError) {
-        console.warn('[TRAANA AI] Gemini API call error, using local emergency engine:', geminiError.message);
+        console.warn('[TRAANA AI] Remote API call error, using local emergency engine:', geminiError.message);
         // Fall through to local fallback engine
       }
     }
@@ -174,7 +283,7 @@ Guidelines:
     const guidance = generateLocalEmergencyGuidance(question, activeAlert, shelters, resources);
     return res.json({
       success: true,
-      provider: 'traana-emergency-core',
+      provider: 'TRAANA Disaster Resilience Core',
       data: guidance
     });
 

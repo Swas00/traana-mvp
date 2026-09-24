@@ -594,6 +594,108 @@ export const ndmaDosAndDonts = {
     ]
   },
 
+  TSUNAMI: {
+    title: "Tsunami & Coastal Harbor Surges (NDMA Marine Safety)",
+    source: "NDMA Tsunami Early Warning Guidelines & INCOIS",
+    url: "https://ndma.gov.in/tsunami-dos-donts",
+    dos: [
+      "If you feel an earthquake near the coast or notice sudden rapid withdrawal of the sea, move IMMEDIATELY to high ground (>30m above sea level) or at least 2 km inland.",
+      "Follow official INCOIS (Indian National Centre for Ocean Information Services) ocean warnings.",
+      "Climb upper floors of sturdy reinforced-concrete buildings if escape inland is impossible.",
+      "Stay in elevated safety until official 'ALL CLEAR' is sounded — tsunami is a series of waves arriving over several hours."
+    ],
+    donts: [
+      "DO NOT go to the beach or harbor to watch the receding tide or incoming waves.",
+      "DO NOT return to low-lying coastal areas after the first wave — subsequent waves are often much larger and violent.",
+      "DO NOT stay inside boats or small trawlers tied in shallow harbor slips."
+    ]
+  },
+
+  THUNDERSTORM: {
+    title: "Thunderstorms & Lightning Strikes (NDMA 'Bijli Se Bachav')",
+    source: "NDMA Guidelines on Preparation of Action Plan for Prevention and Management of Thunderstorms, Lightning & Squalls",
+    url: "https://ndma.gov.in/lightning-dos-donts",
+    dos: [
+      "Follow the 30-30 Rule: If time between lightning flash and thunder is under 30 seconds, seek indoor shelter immediately; wait 30 minutes after last thunderclap before venturing outside.",
+      "If caught in an open field with no shelter, crouch down into the 'Lightning Safety Position' (feet touching, head between knees, cover ears, minimize contact with ground).",
+      "Unplug desktop computers, televisions, and sensitive electrical equipment before the storm hits.",
+      "Seek shelter inside enclosed metal-roof vehicles or permanent brick/concrete buildings."
+    ],
+    donts: [
+      "DO NOT take shelter under isolated tall trees, electric transmission towers, or metal flagpoles.",
+      "DO NOT hold umbrellas with metal tips, golf clubs, or metal farming tools in open paddy fields.",
+      "DO NOT take baths, wash dishes, or touch plumbing pipes during active lightning strikes.",
+      "DO NOT lie flat on the ground (touching the ground increases the strike voltage gradient across your body)."
+    ]
+  },
+
+  WILDFIRE: {
+    title: "Forest Fires & Wildfires (NDMA Forest Protection)",
+    source: "NDMA National Action Plan on Forest Fires",
+    url: "https://ndma.gov.in/forest-fire-dos-donts",
+    dos: [
+      "Evacuate perpendicular or upwind of fire spread; move downhill away from rising thermal updrafts.",
+      "Wear N95/P100 respirators or damp cotton cloth over nose and mouth to prevent smoke inhalation.",
+      "Clear combustible dry leaves, brushwood, and firewood within 10 meters of homes in forest-fringe settlements.",
+      "Report smoke or unattended fire immediately to Forest Department toll-free helplines and 112."
+    ],
+    donts: [
+      "DO NOT attempt to outrun a wildfire uphill (fire travels much faster uphill than downhill).",
+      "DO NOT discard lit bidi/cigarette butts, matchsticks, or burn agricultural stubble near forest edges.",
+      "DO NOT enter smoke-filled canyons or narrow ravine blind spots."
+    ]
+  },
+
+  COLDWAVE: {
+    title: "Cold Wave, Blizzard & Avalanche (NDMA Winter SOP)",
+    source: "NDMA Guidelines for Management of Cold Wave and Frost",
+    url: "https://ndma.gov.in/cold-wave-dos-donts",
+    dos: [
+      "Wear multiple layers of loose, warm, windproof and water-resistant woolen clothing.",
+      "Watch for signs of hypothermia (shivering, slurred speech, confusion) and frostbite (numbness, white or pale skin).",
+      "Keep sufficient dry rations, thermal blankets, hot thermoses, and room heaters with proper ventilation.",
+      "Protect livestock with dry straw bedding and shielded night enclosures."
+    ],
+    donts: [
+      "DO NOT sleep in closed, unventilated rooms with active charcoal angithis or wood brazier fires (causes fatal Carbon Monoxide poisoning).",
+      "DO NOT drink alcohol to 'warm up' (alcohol dilates blood vessels, causing rapid core body heat loss).",
+      "DO NOT rub frostbitten skin with ice or direct flame."
+    ]
+  },
+
+  CLOUDBURST: {
+    title: "Cloudbursts & Mountain Flash Floods (NDMA High Altitude SOP)",
+    source: "NDMA Guidelines on Management of Flash Floods and Cloudbursts",
+    url: "https://ndma.gov.in/cloudburst-dos-donts",
+    dos: [
+      "Upon intense torrential rainfall in mountain valleys, evacuate vertically to surrounding ridges immediately.",
+      "Stay away from dry riverbeds, nullahs, and seasonal ravines (flash flood torrents arrive without acoustic warning).",
+      "Keep emergency whistle, torch, and high-energy food bars in waterproof pouches.",
+      "Follow District Disaster Management Authority (DDMA) hill road advisories."
+    ],
+    donts: [
+      "DO NOT park vehicles or pitch tourist tents on river sandbars or next to mountain torrents.",
+      "DO NOT drive across bridges submerged under torrential glacial runoffs.",
+      "DO NOT stay in valley bottoms during cloudburst alerts issued by IMD."
+    ]
+  },
+
+  DROUGHT: {
+    title: "Drought & Water Scarcity Management (NDMA Guidelines)",
+    source: "NDMA National Disaster Management Guidelines on Drought",
+    url: "https://ndma.gov.in/drought-dos-donts",
+    dos: [
+      "Implement rooftop rainwater harvesting and graywater recycling in community tanks.",
+      "Adopt drip and micro-irrigation systems to optimize agricultural water efficiency.",
+      "Store potable drinking water in sanitized, covered storage vessels with chlorine tablets.",
+      "Protect community farm ponds (Jal Sanrakshan) from industrial pollution."
+    ],
+    donts: [
+      "DO NOT waste municipal piped water for washing driveways, sidewalks, or vehicles during drought advisories.",
+      "DO NOT over-pump borewells beyond permissible groundwater extraction recharge levels."
+    ]
+  },
+
   AIDRR_ANIMALS: {
     title: "Animal-Inclusive Disaster Risk Reduction (NDMA May 2026 AiDRR)",
     source: "NDMA National Guidelines on Animal-inclusive Disaster Risk Reduction (AiDRR - May 2026)",

@@ -76,10 +76,14 @@ export default function Alerts({ setCurrentTab }) {
 
       const matchesSeverity = selectedSeverity === 'ALL' || alert.severity === selectedSeverity;
       const matchesState = selectedState === 'ALL' || alert.location.toLowerCase().includes(selectedState.toLowerCase());
+      const matchesType = selectedType === 'ALL' || 
+        (alert.type && alert.type.toUpperCase().includes(selectedType)) ||
+        (alert.rawDisasterType && alert.rawDisasterType.toUpperCase().includes(selectedType)) ||
+        (alert.title && alert.title.toUpperCase().includes(selectedType));
 
-      return matchesSearch && matchesSeverity && matchesState;
+      return matchesSearch && matchesSeverity && matchesState && matchesType;
     });
-  }, [sachetAlerts, searchTerm, selectedSeverity, selectedState]);
+  }, [sachetAlerts, searchTerm, selectedSeverity, selectedState, selectedType]);
 
   // Filter simulated alerts
   const filteredSimulatedAlerts = (alerts || []).filter(alert => {
@@ -274,6 +278,26 @@ export default function Alerts({ setCurrentTab }) {
                 ))}
               </select>
 
+              {/* Multi-Calamity Type Filter */}
+              <select
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+                className="bg-slate-950 text-white text-xs border border-slate-800 rounded-xl px-3 py-2 font-medium focus:outline-none"
+              >
+                <option value="ALL">All Calamity Types</option>
+                <option value="FLOOD">🌊 Flood & Inundation</option>
+                <option value="CYCLONE">🌀 Cyclonic Storm</option>
+                <option value="EARTHQUAKE">🌋 Earthquake & Tremor</option>
+                <option value="LANDSLIDE">⛰️ Landslide & Mudflow</option>
+                <option value="TSUNAMI">🌊 Tsunami Surge</option>
+                <option value="THUNDERSTORM">⚡ Thunderstorm & Lightning</option>
+                <option value="HEATWAVE">☀️ Heatwave & Loo</option>
+                <option value="WILDFIRE">🔥 Forest Fire / Wildfire</option>
+                <option value="COLDWAVE">❄️ Cold Wave & Frost</option>
+                <option value="CLOUDBURST">🌧️ Cloudburst & Torrent</option>
+                <option value="DROUGHT">🌾 Drought & Scarcity</option>
+              </select>
+
               {/* Severity selector */}
               <div className="flex items-center bg-slate-950 rounded-xl p-1 border border-slate-800 text-xs">
                 {['ALL', 'CRITICAL', 'HIGH', 'MEDIUM'].map(sev => (
@@ -424,6 +448,24 @@ export default function Alerts({ setCurrentTab }) {
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
+              <select
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+                className="bg-slate-950 text-white text-xs border border-slate-800 rounded-xl px-3 py-2 font-medium focus:outline-none"
+              >
+                <option value="ALL">All Hazard Types</option>
+                <option value="FLOOD">🌊 Flood</option>
+                <option value="CYCLONE">🌀 Cyclone</option>
+                <option value="EARTHQUAKE">🌋 Earthquake</option>
+                <option value="LANDSLIDE">⛰️ Landslide</option>
+                <option value="TSUNAMI">🌊 Tsunami</option>
+                <option value="THUNDERSTORM">⚡ Lightning</option>
+                <option value="HEATWAVE">☀️ Heatwave</option>
+                <option value="WILDFIRE">🔥 Wildfire</option>
+                <option value="COLDWAVE">❄️ Cold Wave</option>
+                <option value="CLOUDBURST">🌧️ Cloudburst</option>
+              </select>
+
               <div className="flex items-center bg-slate-950 rounded-xl p-1 border border-slate-800 text-xs">
                 {['ALL', 'HIGH', 'MEDIUM', 'LOW'].map(sev => (
                   <button

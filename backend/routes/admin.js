@@ -156,6 +156,90 @@ router.post('/preset-simulation', async (req, res) => {
         };
         break;
 
+      case 'TSUNAMI_WARNING':
+        newAlertData = {
+          type: 'TSUNAMI',
+          title: 'RED ALERT: Tsunami Coastal Inundation Surge',
+          description: 'Undersea subduction earthquake generated 3.5-meter tsunami waves approaching coastline within 45 minutes.',
+          severity: 'CRITICAL',
+          location: 'Coastal Belt & Harbor Communities',
+          latitude: 28.5700,
+          longitude: 77.2600,
+          radiusKm: 12.0,
+          instructions: [
+            'Evacuate immediately at least 2 km inland or to elevation > 15 meters.',
+            'If sea water suddenly recedes rapidly, DO NOT approach shore.',
+            'Move vertically to 3rd floor or higher of reinforced concrete structures if trapped.',
+            'Never stay on beach to watch waves arrive.'
+          ],
+          affectedPopulation: 95000,
+          active: true
+        };
+        break;
+
+      case 'THUNDERSTORM_LIGHTNING':
+        newAlertData = {
+          type: 'THUNDERSTORM',
+          title: 'SEVERE: Intense Thunderstorm Squall & Lightning Strike Grid',
+          description: 'Squall wind gusts 75 km/h with high-density cloud-to-ground lightning discharge. Risk of falling trees and electrocution.',
+          severity: 'HIGH',
+          location: 'Metro Urban Zone & Open Agricultural Outskirts',
+          latitude: 28.6150,
+          longitude: 77.2100,
+          radiusKm: 8.0,
+          instructions: [
+            'Seek immediate shelter inside substantial pucca buildings or enclosed metal vehicles.',
+            'Do NOT shelter under isolated trees, metal sheds, or open bus stops.',
+            'Unplug sensitive electrical appliances and avoid wired corded landlines.',
+            'Follow the 30-30 rule: stay sheltered until 30 minutes after the last thunderclap.'
+          ],
+          affectedPopulation: 130000,
+          active: true
+        };
+        break;
+
+      case 'CLOUDBURST_LANDSLIDE':
+        newAlertData = {
+          type: 'CLOUDBURST',
+          title: 'CRITICAL: Mountain Cloudburst & Torrential Debris Flow',
+          description: 'Over 100mm rainfall in 60 minutes triggering flash torrents and severe slope failure across hill road corridors.',
+          severity: 'CRITICAL',
+          location: 'Valley Corridors & Mountain Slopes',
+          latitude: 28.6400,
+          longitude: 77.1900,
+          radiusKm: 7.0,
+          instructions: [
+            'Move perpendicular and uphill away from river channels and ravine bottoms.',
+            'Listen for unusual sounds: cracking trees or rumbling boulders indicate immediate slide.',
+            'Halt vehicle travel on mountain roads immediately and seek stable elevated ground.',
+            'Stay alert for secondary slope failures and road collapses.'
+          ],
+          affectedPopulation: 28000,
+          active: true
+        };
+        break;
+
+      case 'HEATWAVE_RED':
+        newAlertData = {
+          type: 'HEATWAVE',
+          title: 'RED ALERT: Severe Heatwave Conditions (45.8°C Loo)',
+          description: 'Excessive ambient daytime temperatures exceeding 45°C with hot dry winds. High risk of heat exhaustion and fatal heat stroke.',
+          severity: 'HIGH',
+          location: 'Central Urban Core & Semi-Arid Sectors',
+          latitude: 28.6250,
+          longitude: 77.2050,
+          radiusKm: 15.0,
+          instructions: [
+            'Avoid outdoor sun exposure between 12:00 PM and 3:30 PM.',
+            'Drink ORS, buttermilk, nimbu pani, and clean water frequently.',
+            'Wear loose light cotton clothes and carry an umbrella or cloth cap.',
+            'Provide shaded cool water for pets and domestic livestock.'
+          ],
+          affectedPopulation: 250000,
+          active: true
+        };
+        break;
+
       default:
         return res.status(400).json({ success: false, message: 'Unknown scenario' });
     }

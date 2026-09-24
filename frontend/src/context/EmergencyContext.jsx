@@ -39,6 +39,29 @@ export function EmergencyProvider({ children }) {
   const [locationMessage, setLocationMessage] = useState('');
   const [language, setLanguage] = useState('en');
   const [highContrast, setHighContrast] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('traana_theme') || 'dark';
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('traana_theme', theme);
+      if (theme === 'light') {
+        document.documentElement.classList.add('light-mode');
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.remove('light-mode');
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {
+      console.warn('Theme storage error:', e);
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
   const [isAudioAlertActive, setIsAudioAlertActive] = useState(false);
   const [demoTourOpen, setDemoTourOpen] = useState(false);
   const [presentationOpen, setPresentationOpen] = useState(false);
@@ -473,6 +496,9 @@ export function EmergencyProvider({ children }) {
         resetToDemoLocation,
         setCustomLocation,
         loading,
+        theme,
+        setTheme,
+        toggleTheme,
         language,
         setLanguage,
         highContrast,

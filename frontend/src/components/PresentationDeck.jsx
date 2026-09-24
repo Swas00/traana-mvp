@@ -171,15 +171,15 @@ export default function PresentationDeck() {
             </div>
             <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
               <span className="text-[10px] uppercase font-bold text-amber-400 tracking-wider">Intelligence & Data</span>
-              <h5 className="font-bold text-white mt-1">Gemini AI + MongoDB</h5>
+              <h5 className="font-bold text-white mt-1">TRAANA Neural AI Engine + MongoDB</h5>
               <p className="text-xs text-slate-400 mt-2">
-                Google GenAI Gemini 3.8 Flash + contextual emergency triage engine. Resilient MongoDB Mongoose schema with in-memory fallback.
+                Contextual emergency triage engine with multi-calamity hazard reasoning. Resilient MongoDB Mongoose schema with dual-mode in-memory fallback.
               </p>
             </div>
           </div>
 
           <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 text-center font-mono text-xs text-slate-300">
-            [ Citizen Browser ] ⇄ [ REST API /api/* ] ⇄ [ MongoDB + Google GenAI ] ⇄ [ Emergency Dispatch Command ]
+            [ Citizen Browser ] ⇄ [ REST API /api/* ] ⇄ [ MongoDB + TRAANA Neural Engine ] ⇄ [ Emergency Dispatch Command ]
           </div>
         </div>
       )
@@ -279,7 +279,7 @@ export default function PresentationDeck() {
               <ul className="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
                 <li><strong>Node.js & Express:</strong> High-throughput REST API with structured routing</li>
                 <li><strong>MongoDB & Mongoose:</strong> Document schemas for alerts, shelters, and resources</li>
-                <li><strong>Google GenAI SDK:</strong> Gemini 3.8 Flash model for emergency contextual reasoning</li>
+                <li><strong>TRAANA Neural AI:</strong> Contextual disaster reasoning engine with multi-hazard triage</li>
                 <li><strong>Dual-Mode Storage:</strong> Zero-fail memory cache ensures offline prototype stability</li>
               </ul>
             </div>

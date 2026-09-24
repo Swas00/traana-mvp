@@ -7,6 +7,7 @@ import {
   Clock, 
   Footprints, 
   Car, 
+  Bike,
   Compass, 
   ShieldCheck, 
   Layers, 
@@ -39,14 +40,15 @@ export default function RoutesMap({ setCurrentTab }) {
   const mapInstanceRef = useRef(null);
   const layersGroupRef = useRef(null);
 
-  const [transportMode, setTransportMode] = useState('WALK'); // 'WALK' | 'VEHICLE'
+  const [transportMode, setTransportMode] = useState('WALK'); // 'WALK' | 'TWO_WHEELER' | 'VEHICLE'
 
   const activeDestination = selectedShelter || shelters[0];
 
   // Calculate distance & estimated times
   const distanceKm = activeDestination?.distanceKm || 2.8;
   const walkMinutes = Math.max(1, Math.round(distanceKm * 12));
-  const driveMinutes = Math.max(1, Math.round(distanceKm * 3.5));
+  const twoWheelerMinutes = Math.max(1, Math.round(distanceKm * 3.0));
+  const driveMinutes = Math.max(1, Math.round(distanceKm * 2.2));
 
   useEffect(() => {
     if (!mapContainerRef.current) return;
@@ -351,19 +353,30 @@ export default function RoutesMap({ setCurrentTab }) {
               <div className="flex bg-slate-950 rounded-xl p-1 border border-slate-800 text-xs">
                 <button
                   onClick={() => setTransportMode('WALK')}
-                  className={`flex items-center gap-1 px-2.5 py-1 rounded-lg font-bold transition ${
-                    transportMode === 'WALK' ? 'bg-blue-600 text-white' : 'text-slate-400'
+                  title="Pedestrian evacuation speed (~5 km/h)"
+                  className={`flex items-center gap-1 px-2 py-1 rounded-lg font-bold transition ${
+                    transportMode === 'WALK' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  <Footprints size={14} /> Walk
+                  <Footprints size={13} /> Walk
+                </button>
+                <button
+                  onClick={() => setTransportMode('TWO_WHEELER')}
+                  title="Motorcycle / Scooter evacuation speed (~20 km/h)"
+                  className={`flex items-center gap-1 px-2 py-1 rounded-lg font-bold transition ${
+                    transportMode === 'TWO_WHEELER' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Bike size={13} /> 2-Wheeler
                 </button>
                 <button
                   onClick={() => setTransportMode('VEHICLE')}
-                  className={`flex items-center gap-1 px-2.5 py-1 rounded-lg font-bold transition ${
-                    transportMode === 'VEHICLE' ? 'bg-blue-600 text-white' : 'text-slate-400'
+                  title="4-Wheeler Car / Van evacuation speed (~28-30 km/h)"
+                  className={`flex items-center gap-1 px-2 py-1 rounded-lg font-bold transition ${
+                    transportMode === 'VEHICLE' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  <Car size={14} /> Drive
+                  <Car size={13} /> 4-Wheeler
                 </button>
               </div>
             </div>
@@ -376,13 +389,54 @@ export default function RoutesMap({ setCurrentTab }) {
               <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800">
                 <span className="text-slate-400 block text-[10px] uppercase font-bold">Estimated Time</span>
                 <span className="text-2xl font-black text-amber-400">
-                  {transportMode === 'WALK' ? `${walkMinutes} mins` : `${driveMinutes} mins`}
+                  {transportMode === 'WALK' 
+                    ? `${walkMinutes} mins` 
+                    : transportMode === 'TWO_WHEELER' 
+                      ? `${twoWheelerMinutes} mins` 
+                      : `${driveMinutes} mins`}
                 </span>
               </div>
             </div>
 
-            <div className="p-3 rounded-2xl bg-blue-950/40 border border-blue-800/40 text-xs text-blue-200">
-              <strong className="block mb-0.5 text-blue-300">Selected Destination:</strong>
+            {/* Transport Mode Safety Telemetry Advisory */}
+            {transportMode === 'TWO_WHEELER' && (
+              <div className="p-3 rounded-2xl bg-amber-950/40 border border-amber-800/50 text-xs text-amber-200 flex items-start gap-2">
+                <AlertTriangle size={15} className="text-amber-400 shrink-0 mt-0.5" />
+                <div>
+                  <strong className="block text-amber-300 font-bold mb-0.5">🛵 2-Wheeler Evacuation Advisory:</strong>
+                  <span className="text-[11px] leading-relaxed block text-amber-200">
+                    High agility around urban debris. <strong>CRITICAL:</strong> Do NOT ride through water exceeding 10-12 cm (severe airbox hydrolock & skidding risk). Fasten helmet chin-strap.
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {transportMode === 'WALK' && (
+              <div className="p-3 rounded-2xl bg-blue-950/40 border border-blue-800/50 text-xs text-blue-200 flex items-start gap-2">
+                <Footprints size={15} className="text-blue-400 shrink-0 mt-0.5" />
+                <div>
+                  <strong className="block text-blue-300 font-bold mb-0.5">🚶 Pedestrian Evacuation Advisory:</strong>
+                  <span className="text-[11px] leading-relaxed block text-blue-200">
+                    Use a walking stick to probe for open manholes or submerged ditches. Never attempt to wade across fast-moving currents above ankle depth.
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {transportMode === 'VEHICLE' && (
+              <div className="p-3 rounded-2xl bg-indigo-950/40 border border-indigo-800/50 text-xs text-indigo-200 flex items-start gap-2">
+                <Car size={15} className="text-indigo-400 shrink-0 mt-0.5" />
+                <div>
+                  <strong className="block text-indigo-300 font-bold mb-0.5">🚗 4-Wheeler Evacuation Advisory:</strong>
+                  <span className="text-[11px] leading-relaxed block text-indigo-200">
+                    Keep windows cracked 2 cm for emergency escape. Avoid standing water above 15 cm (water can float vehicles weighing 1.5 tons).
+                  </span>
+                </div>
+              </div>
+            )}
+
+            <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 text-xs text-slate-300">
+              <strong className="block mb-0.5 text-blue-400">Selected Destination:</strong>
               <span className="font-bold text-white text-sm block">{activeDestination?.name}</span>
               <span className="text-slate-400 text-[11px]">{activeDestination?.address}</span>
             </div>

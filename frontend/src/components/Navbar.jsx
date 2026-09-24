@@ -11,6 +11,7 @@ import {
   Volume2, 
   VolumeX, 
   Sun, 
+  Moon,
   Eye, 
   Presentation,
   PlayCircle,
@@ -41,6 +42,8 @@ export default function Navbar({ currentTab, setCurrentTab, onOpenShare, onOpenF
     sachetTelemetry,
     sachetSyncing,
     syncSachetNow,
+    theme,
+    toggleTheme,
     language, 
     setLanguage, 
     highContrast, 
@@ -173,39 +176,68 @@ export default function Navbar({ currentTab, setCurrentTab, onOpenShare, onOpenF
             <span className="hidden md:inline">{isAudioAlertActive ? 'Siren Active' : 'Siren'}</span>
           </button>
 
+          {/* Dark / Light Mode Toggle */}
+          <button
+            onClick={toggleTheme}
+            title={theme === 'dark' ? "Switch to Light Daylight Mode" : "Switch to Dark Tactical Mode"}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold transition bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
+          >
+            {theme === 'dark' ? (
+              <>
+                <Sun size={14} className="text-amber-400" />
+                <span className="hidden md:inline text-amber-300">Light</span>
+              </>
+            ) : (
+              <>
+                <Moon size={14} className="text-blue-500" />
+                <span className="hidden md:inline text-blue-600 font-bold">Dark</span>
+              </>
+            )}
+          </button>
+
           {/* High Contrast Mode */}
           <button
             onClick={() => setHighContrast(!highContrast)}
             title="Toggle High Contrast for Disaster Readability"
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold transition ${
+            className={`flex items-center gap-1.5 px-2 py-1 rounded text-xs font-semibold transition ${
               highContrast 
                 ? 'bg-yellow-400 text-black' 
                 : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
             }`}
           >
-            <Eye size={14} />
-            <span className="hidden md:inline">{highContrast ? 'Normal' : 'High Contrast'}</span>
+            <Eye size={13} />
+            <span className="hidden lg:inline">{highContrast ? 'Normal' : 'Contrast'}</span>
           </button>
 
-          {/* Language selector */}
-          <div className="flex items-center bg-slate-800 rounded p-0.5 border border-slate-700">
+          {/* Indian Languages Selector: English, Hindi, Bengali, Tamil */}
+          <div className="flex items-center bg-slate-800 rounded p-0.5 border border-slate-700 text-xs">
             <button
               onClick={() => setLanguage('en')}
-              className={`px-2 py-0.5 text-xs rounded font-medium ${language === 'en' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'}`}
+              title="English"
+              className={`px-2 py-0.5 text-xs rounded font-bold transition ${language === 'en' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
             >
               EN
             </button>
             <button
               onClick={() => setLanguage('hi')}
-              className={`px-2 py-0.5 text-xs rounded font-medium ${language === 'hi' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'}`}
+              title="हिन्दी (Hindi)"
+              className={`px-2 py-0.5 text-xs rounded font-bold transition ${language === 'hi' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
             >
               हिन्दी
             </button>
             <button
-              onClick={() => setLanguage('es')}
-              className={`px-2 py-0.5 text-xs rounded font-medium ${language === 'es' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'}`}
+              onClick={() => setLanguage('bn')}
+              title="বাংলা (Bengali)"
+              className={`px-2 py-0.5 text-xs rounded font-bold transition ${language === 'bn' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
             >
-              ES
+              বাংলা
+            </button>
+            <button
+              onClick={() => setLanguage('ta')}
+              title="தமிழ் (Tamil)"
+              className={`px-2 py-0.5 text-xs rounded font-bold transition ${language === 'ta' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
+            >
+              தமிழ்
             </button>
           </div>
 

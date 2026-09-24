@@ -97,3 +97,120 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #475569;
 }
+
+/* ==========================================================================
+   Light Mode Design System (Daylight Emergency Clarity)
+   ========================================================================== */
+html.light-mode,
+html.light-mode body {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+html.light-mode ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+html.light-mode ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+html.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Card & Container Overrides */
+html.light-mode .bg-slate-950,
+html.light-mode .bg-slate-900 {
+  background-color: #ffffff !important;
+}
+
+html.light-mode .bg-slate-900\/95,
+html.light-mode .bg-slate-900\/90,
+html.light-mode .bg-slate-900\/80,
+html.light-mode .bg-slate-900\/70,
+html.light-mode .bg-slate-900\/60,
+html.light-mode .bg-slate-900\/50,
+html.light-mode .bg-slate-950\/90,
+html.light-mode .bg-slate-950\/80,
+html.light-mode .bg-slate-950\/70,
+html.light-mode .bg-slate-950\/60 {
+  background-color: rgba(255, 255, 255, 0.94) !important;
+}
+
+html.light-mode .bg-slate-800 {
+  background-color: #f1f5f9 !important;
+}
+
+html.light-mode .bg-slate-800\/90,
+html.light-mode .bg-slate-800\/80,
+html.light-mode .bg-slate-800\/70,
+html.light-mode .bg-slate-800\/60,
+html.light-mode .bg-slate-800\/50 {
+  background-color: #e2e8f0 !important;
+}
+
+html.light-mode .hover\:bg-slate-800:hover,
+html.light-mode .hover\:bg-slate-700:hover,
+html.light-mode .hover\:bg-slate-900:hover {
+  background-color: #e2e8f0 !important;
+}
+
+/* Borders */
+html.light-mode .border-slate-800,
+html.light-mode .border-slate-800\/80,
+html.light-mode .border-slate-800\/70,
+html.light-mode .border-slate-800\/60,
+html.light-mode .border-slate-800\/50,
+html.light-mode .border-slate-800\/40,
+html.light-mode .border-slate-700,
+html.light-mode .border-slate-700\/80,
+html.light-mode .border-slate-700\/50 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Text Hierarchy */
+html.light-mode .text-white {
+  color: #0f172a !important;
+}
+
+html.light-mode .text-slate-100,
+html.light-mode .text-slate-200,
+html.light-mode .text-slate-300 {
+  color: #1e293b !important;
+}
+
+html.light-mode .text-slate-400 {
+  color: #475569 !important;
+}
+
+html.light-mode .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Inputs, Textareas, Selects */
+html.light-mode input,
+html.light-mode textarea,
+html.light-mode select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light-mode input::placeholder,
+html.light-mode textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Leaflet in Light Mode */
+html.light-mode .leaflet-popup-content-wrapper {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12) !important;
+}
+
+html.light-mode .leaflet-popup-tip {
+  background: #ffffff !important;
+}
+

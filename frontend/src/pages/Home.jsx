@@ -18,6 +18,7 @@ import {
   Play
 } from 'lucide-react';
 import { useEmergency } from '../context/EmergencyContext';
+import DisasterRadarVisual from '../components/DisasterRadarVisual';
 
 export default function Home({ setCurrentTab }) {
   const { activeAlert, shelters, t, setDemoTourOpen, triggerFloodAlert } = useEmergency();
@@ -26,51 +27,62 @@ export default function Home({ setCurrentTab }) {
 
   return (
     <div className="space-y-10 pb-16">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950/60 border border-slate-800 p-6 md:p-12 shadow-2xl">
-        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-80 h-80 rounded-full bg-red-600/10 blur-3xl pointer-events-none"></div>
+      {/* Hero Section with Transparent Animated Early Warning Radar */}
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950/60 border border-slate-800 p-6 md:p-10 shadow-2xl">
+        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-80 h-80 rounded-full bg-cyan-600/10 blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-80 h-80 rounded-full bg-blue-600/10 blur-3xl pointer-events-none"></div>
 
-        <div className="relative z-10 max-w-3xl space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold tracking-wide uppercase">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-            Disaster Alert & Emergency Response Prototype
+        <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
+          {/* Left Column: Headlines & Action CTAs */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold tracking-wide uppercase">
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+              Multi-Hazard Early Warning & Evacuation System
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-5xl font-black text-white tracking-tight leading-tight">
+              Threat Response & Assistance Network for <span className="bg-gradient-to-r from-red-500 via-amber-400 to-amber-500 bg-clip-text text-transparent">Alerts & Navigation</span>
+            </h1>
+
+            <p className="text-base text-slate-300 leading-relaxed font-normal">
+              TRAANA guides citizens through the critical moments of a catastrophe: from early warning radar sweeps and real-time NDMA SACHET synchronization, to verified high-ground shelter discovery, hazard-avoiding routes, and 24/7 contextual emergency AI triage.
+            </p>
+
+            {/* Quick CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <button
+                onClick={() => setCurrentTab('dashboard')}
+                className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold text-sm shadow-xl shadow-red-600/25 transition transform active:scale-95"
+              >
+                <Radio size={18} />
+                <span>{t.navDashboard}</span>
+                <ArrowRight size={16} />
+              </button>
+
+              <button
+                onClick={() => setCurrentTab('shelters')}
+                className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-sm transition"
+              >
+                <ShieldAlert size={18} className="text-amber-400" />
+                <span>{t.findShelterBtn}</span>
+              </button>
+
+              <button
+                onClick={() => setDemoTourOpen(true)}
+                className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 font-bold text-sm transition"
+              >
+                <Play size={16} />
+                <span>Run Guided Demo</span>
+              </button>
+            </div>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight">
-            Threat Response & Assistance Network for <span className="bg-gradient-to-r from-red-500 via-amber-400 to-amber-500 bg-clip-text text-transparent">Alerts & Navigation</span>
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-            TRAANA guides citizens through the critical moments of a catastrophe: from the instant a disaster alert sounds, to discovering verified high-ground shelters, navigating hazard-avoiding routes, and consulting contextual emergency AI.
-          </p>
-
-          {/* Quick CTA Buttons */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
-            <button
-              onClick={() => setCurrentTab('dashboard')}
-              className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold text-sm shadow-xl shadow-red-600/25 transition transform active:scale-95"
-            >
-              <Radio size={18} />
-              <span>{t.navDashboard}</span>
-              <ArrowRight size={16} />
-            </button>
-
-            <button
-              onClick={() => setCurrentTab('shelters')}
-              className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-sm transition"
-            >
-              <ShieldAlert size={18} className="text-amber-400" />
-              <span>{t.findShelterBtn}</span>
-            </button>
-
-            <button
-              onClick={() => setDemoTourOpen(true)}
-              className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 font-bold text-sm transition"
-            >
-              <Play size={16} />
-              <span>Run Guided Demo Flow</span>
-            </button>
+          {/* Right Column: Transparent Animated Disaster Radar Visual */}
+          <div className="lg:col-span-5 flex justify-center">
+            <DisasterRadarVisual 
+              activeCalamity={activeAlert ? activeAlert.type : 'ALL'} 
+              onSelectCalamity={() => {}}
+            />
           </div>
         </div>
       </section>

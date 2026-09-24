@@ -24,12 +24,18 @@ export default function NdmaGuidelinesModal({ isOpen, onClose }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   const hazardTabs = [
-    { id: 'FLOOD', label: '🌊 Floods & Rain', icon: Waves },
-    { id: 'CYCLONE', label: '🌀 Cyclones', icon: Wind },
+    { id: 'FLOOD', label: '🌊 Floods & Inundation', icon: Waves },
+    { id: 'CYCLONE', label: '🌀 Cyclones & Storm Surges', icon: Wind },
     { id: 'EARTHQUAKE', label: '🏚️ Earthquakes', icon: Flame },
+    { id: 'LANDSLIDE', label: '⛰️ Landslides & Mudflows', icon: Compass },
+    { id: 'TSUNAMI', label: '🌊 Tsunamis & Marine Surges', icon: Waves },
+    { id: 'THUNDERSTORM', label: '⚡ Thunderstorms & Lightning', icon: Sparkles },
     { id: 'HEATWAVE', label: '☀️ Heatwaves', icon: Sun },
-    { id: 'LANDSLIDE', label: '⛰️ Landslides', icon: Compass },
-    { id: 'AIDRR_ANIMALS', label: '🐾 Animals & Pets (AiDRR)', icon: HeartHandshake }
+    { id: 'WILDFIRE', label: '🔥 Forest Fires', icon: Flame },
+    { id: 'CLOUDBURST', label: '🌧️ Cloudbursts & Flash Floods', icon: Waves },
+    { id: 'COLDWAVE', label: '❄️ Cold Waves & Avalanches', icon: Wind },
+    { id: 'DROUGHT', label: '🌾 Drought & Water Scarcity', icon: Sun },
+    { id: 'AIDRR_ANIMALS', label: '🐾 Animals & Livestock (AiDRR)', icon: HeartHandshake }
   ];
 
   useEffect(() => {

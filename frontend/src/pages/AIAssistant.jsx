@@ -27,14 +27,66 @@ export default function AIAssistant({ setCurrentTab }) {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
-  const quickPrompts = [
-    "What should I do during this flood?",
-    "Where is the nearest safe shelter?",
-    "What should I pack in my 72h go-bag?",
-    "Is tap water safe to drink right now?",
-    "What to do if there is a downed power cable?",
-    "Show me emergency helpline phone numbers"
-  ];
+  const [selectedCalamityCategory, setSelectedCalamityCategory] = useState('ALL');
+
+  const calamityPrompts = {
+    ALL: [
+      "Where is the nearest safe shelter and available beds?",
+      "What should I pack in my 72h emergency go-bag?",
+      "What are the national emergency helplines (112, 1070, 1078)?",
+      "Earthquake: Drop, Cover & Hold On rules?",
+      "Cyclone: Pre-landfall home safety checklist?",
+      "Lightning/Thunderstorm: Safe shelter protocol?",
+      "Tsunami: How far inland must I evacuate?",
+      "Heatwave: Emergency treatment for severe heat stroke?",
+      "Cloudburst/Landslide: Signs of imminent slope failure?",
+      "Flood: Can I drink boiled tap water safely?"
+    ],
+    FLOOD: [
+      "What should I do during this flood emergency?",
+      "Is tap water safe to drink right now?",
+      "What to do if there is a downed electrical power cable?",
+      "How to disinfect water using chlorine or boiling?"
+    ],
+    EARTHQUAKE: [
+      "What is the exact Drop, Cover, and Hold On protocol?",
+      "Should I run outside during active shaking?",
+      "What to do if trapped under earthquake debris?",
+      "How to inspect gas lines and structural damage after a tremor?"
+    ],
+    CYCLONE: [
+      "What is the pre-landfall home reinforcement checklist?",
+      "What should I do during the calm 'eye' of the cyclone?",
+      "How to protect windows from 130 km/h wind gusts?",
+      "When is it safe to venture outside after cyclone landfall?"
+    ],
+    TSUNAMI: [
+      "How far inland or to what elevation must I evacuate for a tsunami?",
+      "If the sea water suddenly recedes rapidly, what should I do?",
+      "Is a coastal multi-storey RCC building safe during a tsunami?",
+      "How long after the first wave do subsequent tsunami waves arrive?"
+    ],
+    THUNDERSTORM: [
+      "What is the 30-30 lightning safety rule?",
+      "Are cars or metal bus shelters safe during severe lightning?",
+      "What to do if hair stands on end in an open field during a storm?",
+      "Can I use mobile phones or plug-in appliances during thunderstorms?"
+    ],
+    HEATWAVE: [
+      "How to treat sudden heat stroke and high body temperature?",
+      "What fluids should I drink besides water (ORS, buttermilk)?",
+      "What are the dangerous symptoms of heat exhaustion vs heat stroke?",
+      "How to protect infants and elderly during 45°C+ heatwaves?"
+    ],
+    LANDSLIDE: [
+      "What are early warning signs of imminent mountain slope failure?",
+      "If caught in a cloudburst or debris flow, which way should I run?",
+      "Are culverts and stream channels safe during mountain downpours?",
+      "What should mountain road motorists do if boulders begin falling?"
+    ]
+  };
+
+  const quickPrompts = calamityPrompts[selectedCalamityCategory] || calamityPrompts.ALL;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -117,7 +169,7 @@ export default function AIAssistant({ setCurrentTab }) {
           <h1 className="text-3xl font-black text-white tracking-tight flex items-center gap-3">
             <span>{t.aiTitle}</span>
             <span className="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold border border-purple-500/30 flex items-center gap-1">
-              <Sparkles size={12} /> Gemini Contextual AI
+              <Sparkles size={12} /> TRAANA Neural Disaster AI
             </span>
           </h1>
           <p className="text-sm text-slate-400 mt-1">
@@ -133,7 +185,41 @@ export default function AIAssistant({ setCurrentTab }) {
         )}
       </div>
 
-      {/* Quick Prompts Chips */}
+      {/* Multi-Calamity Category Selector */}
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+            Select Disaster Knowledge Topic:
+          </span>
+          <span className="text-[11px] text-cyan-400 font-mono">100% Calamity Spectrum</span>
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {[
+            { id: 'ALL', label: 'All Hazards' },
+            { id: 'FLOOD', label: '🌊 Flood' },
+            { id: 'EARTHQUAKE', label: '🌋 Earthquake' },
+            { id: 'CYCLONE', label: '🌀 Cyclone' },
+            { id: 'TSUNAMI', label: '🌊 Tsunami' },
+            { id: 'THUNDERSTORM', label: '⚡ Lightning' },
+            { id: 'HEATWAVE', label: '☀️ Heatwave' },
+            { id: 'LANDSLIDE', label: '⛰️ Landslide' }
+          ].map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => setSelectedCalamityCategory(cat.id)}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition border ${
+                selectedCalamityCategory === cat.id
+                  ? 'bg-blue-600 text-white border-blue-400 shadow-sm'
+                  : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-white hover:bg-slate-800'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Quick Prompts Chips for Selected Calamity */}
       <div className="space-y-2">
         <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
           {t.quickQuestions}:
@@ -143,7 +229,7 @@ export default function AIAssistant({ setCurrentTab }) {
             <button
               key={idx}
               onClick={() => handleSend(prompt)}
-              className="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-xs font-medium transition"
+              className="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-xs font-medium transition text-left"
             >
               {prompt}
             </button>

@@ -295,6 +295,36 @@ export default function Admin({ setCurrentTab }) {
               </div>
               <p className="text-[11px] text-slate-400 mt-1">Structural advisory, open ground muster.</p>
             </button>
+
+            <button
+              onClick={() => handlePresetSimulation('TSUNAMI_WARNING')}
+              className="p-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-800 text-left transition"
+            >
+              <div className="flex items-center gap-2 text-red-400 font-bold text-xs">
+                <Waves size={14} /> Tsunami Coastal Surge
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">3.5m wave front, evacuate 2 km inland.</p>
+            </button>
+
+            <button
+              onClick={() => handlePresetSimulation('THUNDERSTORM_LIGHTNING')}
+              className="p-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-800 text-left transition"
+            >
+              <div className="flex items-center gap-2 text-purple-400 font-bold text-xs">
+                <Zap size={14} /> Thunderstorm & Lightning
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">Severe squall, 30-30 shelter protocol.</p>
+            </button>
+
+            <button
+              onClick={() => handlePresetSimulation('CLOUDBURST_LANDSLIDE')}
+              className="p-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-800 text-left transition"
+            >
+              <div className="flex items-center gap-2 text-emerald-400 font-bold text-xs">
+                <ShieldAlert size={14} /> Cloudburst & Landslide
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">100mm/h torrent, valley slope collapse.</p>
+            </button>
           </div>
         </div>
       </div>
@@ -320,11 +350,17 @@ export default function Admin({ setCurrentTab }) {
                   onChange={(e) => setFormType(e.target.value)}
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none"
                 >
-                  <option value="FLOOD">Flood</option>
-                  <option value="CYCLONE">Cyclone</option>
-                  <option value="EARTHQUAKE">Earthquake</option>
-                  <option value="WILDFIRE">Wildfire</option>
-                  <option value="TSUNAMI">Tsunami</option>
+                  <option value="FLOOD">🌊 Flood & Inundation</option>
+                  <option value="CYCLONE">🌀 Severe Cyclone</option>
+                  <option value="EARTHQUAKE">🌋 Earthquake</option>
+                  <option value="LANDSLIDE">⛰️ Landslide</option>
+                  <option value="TSUNAMI">🌊 Tsunami Surge</option>
+                  <option value="THUNDERSTORM">⚡ Thunderstorm & Lightning</option>
+                  <option value="HEATWAVE">☀️ Severe Heatwave</option>
+                  <option value="WILDFIRE">🔥 Forest Fire / Wildfire</option>
+                  <option value="COLDWAVE">❄️ Severe Cold Wave</option>
+                  <option value="CLOUDBURST">🌧️ Mountain Cloudburst</option>
+                  <option value="DROUGHT">🌾 Severe Drought</option>
                 </select>
               </div>
 

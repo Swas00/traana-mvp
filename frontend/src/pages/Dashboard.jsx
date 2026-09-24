@@ -20,6 +20,7 @@ import {
   Zap
 } from 'lucide-react';
 import { useEmergency } from '../context/EmergencyContext';
+import DisasterRadarVisual from '../components/DisasterRadarVisual';
 
 export default function Dashboard({ setCurrentTab }) {
   const { 
@@ -202,45 +203,62 @@ export default function Dashboard({ setCurrentTab }) {
           </div>
         </div>
 
-        {/* Live warnings preview cards */}
-        {sachetAlerts && sachetAlerts.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pt-1">
-            {sachetAlerts.slice(0, 2).map((sa) => (
-              <div
-                key={sa.id}
-                className="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between gap-2"
-              >
-                <div className="truncate">
-                  <div className="flex items-center gap-1.5">
-                    <span className={`px-1.5 py-0.2 rounded text-[9px] font-black uppercase ${
-                      sa.severity === 'CRITICAL' ? 'bg-red-600 text-white' :
-                      sa.severity === 'HIGH' ? 'bg-amber-600 text-white' : 'bg-yellow-500 text-black'
-                    }`}>
-                      {sa.rawDisasterType || sa.type}
-                    </span>
-                    <span className="text-[11px] font-bold text-white truncate max-w-[200px] sm:max-w-[280px]">
-                      {sa.location}
-                    </span>
-                  </div>
-                  <span className="text-[10px] text-slate-400 block truncate">
-                    {sa.description}
-                  </span>
-                </div>
+        <div className="grid lg:grid-cols-12 gap-6 items-center pt-2">
+          {/* Left Column: Live Warning Dispatches & National Telemetry */}
+          <div className="lg:col-span-7 space-y-3">
+            <div className="flex items-center justify-between text-[11px] text-slate-400">
+              <span>National Warning Feed: <strong>{sachetAlerts?.length || 60} Active Pan-India Alerts</strong></span>
+              <span>Click Deploy to set as primary citizen scenario</span>
+            </div>
 
-                <button
-                  onClick={async () => {
-                    await activateSachetAlert(sa.id);
-                  }}
-                  title="Deploy this live Indian alert to your evacuation dashboard"
-                  className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-600/30 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/30 text-[10px] font-bold shrink-0 transition"
-                >
-                  <Zap size={10} className="text-yellow-400" />
-                  <span>Deploy</span>
-                </button>
+            {sachetAlerts && sachetAlerts.length > 0 && (
+              <div className="space-y-2">
+                {sachetAlerts.slice(0, 3).map((sa) => (
+                  <div
+                    key={sa.id}
+                    className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-between gap-3 shadow-sm hover:border-slate-700 transition"
+                  >
+                    <div className="truncate">
+                      <div className="flex items-center gap-2">
+                        <span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase ${
+                          sa.severity === 'CRITICAL' ? 'bg-red-600 text-white' :
+                          sa.severity === 'HIGH' ? 'bg-amber-600 text-white' : 'bg-yellow-500 text-black'
+                        }`}>
+                          {sa.rawDisasterType || sa.type}
+                        </span>
+                        <span className="text-xs font-bold text-white truncate max-w-[200px] sm:max-w-[280px]">
+                          {sa.location}
+                        </span>
+                      </div>
+                      <span className="text-[11px] text-slate-400 block truncate mt-0.5">
+                        {sa.description}
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={async () => {
+                        await activateSachetAlert(sa.id);
+                      }}
+                      title="Deploy this live Indian alert to your evacuation dashboard"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600/30 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-bold shrink-0 transition"
+                    >
+                      <Zap size={12} className="text-yellow-400" />
+                      <span>Deploy</span>
+                    </button>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
-        )}
+
+          {/* Right Column: Transparent Animated Disaster Early Warning Radar */}
+          <div className="lg:col-span-5 flex justify-center">
+            <DisasterRadarVisual 
+              activeCalamity={activeAlert ? activeAlert.type : 'ALL'} 
+              onSelectCalamity={() => {}}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Main Alert Card */}
