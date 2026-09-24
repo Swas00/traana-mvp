@@ -1,0 +1,29 @@
+{
+  "name": "traana-disaster-network",
+  "version": "1.0.0",
+  "description": "TRAANA — Threat Response & Assistance Network for Alerts and Navigation MVP",
+  "main": "backend/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"blue,green\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm start",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "postinstall": "cd backend && npm install && cd ../frontend && npm install",
+    "share": "npx localtunnel --port 3000"
+  },
+  "keywords": [
+    "disaster-response",
+    "emergency-navigation",
+    "shelter-discovery",
+    "ai-assistant",
+    "traana",
+    "ndma-sachet"
+  ],
+  "author": "TRAANA Development Team",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
